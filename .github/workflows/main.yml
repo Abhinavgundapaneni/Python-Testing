@@ -48,13 +48,13 @@ jobs:
           echo "VERSION = $(python setup.py --version)" >> $GITHUB_ENV
 
       - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v1
         with:
          files: ./dist/*.whl
-         tag_name: v1.2.0-${{ matrix.python-version }}  # Replace with the name of the existing tag you want to use
+         tag_name: v1.2.0  # Replace with the name of the existing tag you want to use
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          if: startsWith(github.ref, 'refs/tags/')  # Check if the workflow is running on a tag
 
       - name: Upload the wheels
         uses: actions/upload-artifact@v4
