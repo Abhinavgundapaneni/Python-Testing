@@ -62,4 +62,12 @@ jobs:
           name: built_wheel
           path: dist/*.whl
 
+      - name: Deploy to Azure Databricks
+        run: |
+          databricks configure --token <<EOF
+          ${{ secrets.DATABRICKS_HOST }}
+          ${{ secrets.DATABRICKS_TOKEN }}
+          EOF
+          databricks libraries install --cluster-id ${{ secrets.DATABRICKS_CLUSTER_ID }} --whl dist/*.whl
+
 
