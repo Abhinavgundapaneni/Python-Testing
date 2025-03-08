@@ -56,4 +56,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           if: startsWith(github.ref, 'refs/tags/')  # Check if the workflow is running on a tag
 
+      - name: Upload the wheels
+        uses: actions/upload-artifact@v3
+        with:
+          name: built_wheel
+          path: dist/*.whl
+
 
