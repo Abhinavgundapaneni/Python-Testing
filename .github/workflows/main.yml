@@ -1,0 +1,6 @@
+name: python package testing
+
+on: 
+  push:
+    branches: main
+    
